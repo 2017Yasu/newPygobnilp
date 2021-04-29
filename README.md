@@ -22,4 +22,8 @@ The main differences between this new pygobnilp and the original [pygobnilp](htt
 - `CGaussianBIC` class: This class offers calculation of conditional Gaussian BIC score, which is the log-likelihood penalised by `df * log(N) / 2` for the each pair of child and parents, where `df` is the degrees of freedom of the pair and `N` is the number of variables.
 - `CGaussianAIC` class: This class offers calculation of conditional Gaussian AIC score, which is the log-likelihood penalised by `df` for the each pair of child and parents.
 
+An example usage can be seen in the [testMixedDataLearning.ipynb]() notebook.
 
+## Requirements
+
+Since pygobnilp uses an optimization solver, you are required to install one from [Gurobi](https://www.gurobi.com/). How to do this can be found in the original [pygobnilp](https://www.cs.york.ac.uk/aig/sw/gobnilp/) website.
