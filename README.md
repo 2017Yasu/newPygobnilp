@@ -4,7 +4,7 @@
 
 ## Bayesian networks
 
-A Baysian networks (BN) is represented as a *directed acyclic graph (DAG)* $G=(V,E)$ which is a directed graph with the absence of cycles. The following image illustrates an example, called 'Asia', which was introduced by Lauritzen and Spiegelhalter. This represents a probabilistic model for a medical expert system. Each variable can be either TRUE (t) or FALSE (f), and each of them means as follows: A = "visit to Asia", T = "Tuberculosis", X = "Normal X-Ray result", E = "Either tuberculosis or lung cancer", L = "Lung cancer", D = "Dyspnea (shortness of breath)", S = "Smoker", and B = "Bronchitis". It is evident from this BN that variable D is a 'child' of 'parents' E and B, which visually tells that bronchitis and either tuberculosis or lung cancer directly influence the probability to cause dyspnea. In this way, BNs efficiently present probabilistic relationships.
+A Baysian networks (BN) is represented as a *directed acyclic graph (DAG)* G=(V,E) which is a directed graph with the absence of cycles. The following image illustrates an example, called 'Asia', which was introduced by Lauritzen and Spiegelhalter. This represents a probabilistic model for a medical expert system. Each variable can be either TRUE (t) or FALSE (f), and each of them means as follows: A = "visit to Asia", T = "Tuberculosis", X = "Normal X-Ray result", E = "Either tuberculosis or lung cancer", L = "Lung cancer", D = "Dyspnea (shortness of breath)", S = "Smoker", and B = "Bronchitis". It is evident from this BN that variable D is a 'child' of 'parents' E and B, which visually tells that bronchitis and either tuberculosis or lung cancer directly influence the probability to cause dyspnea. In this way, BNs efficiently present probabilistic relationships.
 
 <img width="1440" alt="asia" src="https://user-images.githubusercontent.com/36260690/116341231-7d9da980-a81b-11eb-82d8-1f76dcf04ed4.png">
 
@@ -21,3 +21,5 @@ The main differences between this new pygobnilp and the original [pygobnilp](htt
 - `CGaussianLL` class: This class offers calculation of conditional Gaussian LL score which can be used to evaluate a DAG. In this case, the DAG must be learned from a dataset which consists of discrete and continuous data.
 - `CGaussianBIC` class: This class offers calculation of conditional Gaussian BIC score, which is the log-likelihood penalised by `df * log(N) / 2` for the each pair of child and parents, where `df` is the degrees of freedom of the pair and `N` is the number of variables.
 - `CGaussianAIC` class: This class offers calculation of conditional Gaussian AIC score, which is the log-likelihood penalised by `df` for the each pair of child and parents.
+
+
