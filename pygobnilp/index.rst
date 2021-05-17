@@ -130,7 +130,43 @@ The BGe class
    :members:
    :show-inheritance:
 
+The MixedData class
+-------------------
+
+.. autoclass:: pygobnilp.scoring.MixedData
+   :members:
+   :show-inheritance:
+
+The AbsCGaussianLLScore class
+-----------------------------
+
+.. autoclass:: pygobnilp.scoring.AbsCGaussianLLScore
+   :members:
+   :show-inheritance:
+
+The CGaussianLL class
+---------------------
+
+.. autoclass:: pygobnilp.scoring.CGaussianLL
+   :members:
+   :show-inheritance:
+
+The CGaussianBIC class
+----------------------
+
+.. autoclass:: pygobnilp.scoring.CGaussianBIC
+   :members:
+   :show-inheritance:
+
       
+The CGaussianAIC class
+----------------------
+
+.. autoclass:: pygobnilp.scoring.CGaussianAIC
+   :members:
+   :show-inheritance:
+
+
 Functions in the gobnilp module
 -------------------------------
 
