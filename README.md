@@ -33,12 +33,12 @@ A simple example usage can be seen in the [testMixedDataLearning.ipynb](https://
 1. a number of Python packages (`scipy`, `pygraphviz`, `matplotlib`, `networkx`, `pandas`, `numpy`, `scikit-learn` and `numba`) and
 2. the Gurobi MIP solver.
 
-`pygraphviz` also requires [graphviz](https://www.graphviz.org/) to be installed.
+`pygraphviz` also requires [Graphviz (or Graph Visualization Software)](https://www.graphviz.org/) to be installed.
 
 Although one can install all these separately the easier option is to install
 Anaconda Python and Gurobi together. To do this, follow the instruction shown in [this website](https://www.gurobi.com/get-anaconda/). Installing Anaconda will get you most of the required
 packages but not (at present) `pygraphviz`, which, once Anaconda is in place,
-you can install with: `conda install pygraphviz`. `graphviz` is not a Python
+you can install with: `conda install pygraphviz`. [Graphviz](https://www.graphviz.org/) is not a Python
 package and has to be installed separately (if you do not already have it on your
 system).
 
