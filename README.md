@@ -44,3 +44,11 @@ system).
 
 Gurobi is a commercial system and requires a licence to run. However, an
 academic licence is free, see https://www.gurobi.com/academia/academic-program-and-licenses/.
+
+### Installing pygobnilp
+
+To install this new pygobnilp, run the following code in your terminal.
+
+```
+python setup.py develop
+```
