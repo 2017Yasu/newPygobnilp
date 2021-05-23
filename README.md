@@ -50,5 +50,5 @@ academic licence is free, see https://www.gurobi.com/academia/academic-program-a
 To install this new pygobnilp, run the following code in your terminal.
 
 ```
-python setup.py develop
+python pygobnilp/setup.py develop
 ```
