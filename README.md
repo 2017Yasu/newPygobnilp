@@ -44,5 +44,3 @@ system).
 
 Gurobi is a commercial system and requires a licence to run. However, an
 academic licence is free, see https://www.gurobi.com/academia/academic-program-and-licenses/.
-
-Since pygobnilp uses an optimization solver, you are required to install one from [Gurobi](https://www.gurobi.com/). How to do this can be found in the original [pygobnilp](https://www.cs.york.ac.uk/aig/sw/gobnilp/) website.
