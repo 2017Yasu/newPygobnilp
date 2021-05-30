@@ -24,6 +24,31 @@ The main differences between this new pygobnilp and the original [pygobnilp](htt
 
 A simple example usage can be seen in the [testMixedDataLearning.ipynb](https://github.com/2017Yasu/newPygobnilp/blob/main/testMixedDataLearning.ipynb) notebook. This tutorial uses mixed and continuous dataset extracted from an R package, [bnlearn](https://www.bnlearn.com/).
 
-## Requirements
+## Installation
 
-Since pygobnilp uses an optimization solver, you are required to install one from [Gurobi](https://www.gurobi.com/). How to do this can be found in the original [pygobnilp](https://www.cs.york.ac.uk/aig/sw/gobnilp/) website.
+### Dependencies
+
+pygobnilp depends on (1) a number of Python packages (scipy, pygraphviz, matplotlib, networkx, pandas, numpy, scikit-learn and numba) and (2) the Gurobi
+MIP solver. pygraphviz also requires [graphviz](https://www.graphviz.org/) to be installed.
+
+Although one can install all these separately the easier option is to install
+Anaconda Python and Gurobi together. Just go [here](https://www.gurobi.com/get-anaconda/). Installing Anaconda will get you most of the required
+packages but not (at present) pygraphviz, which, once Anaconda is in place,
+you can install with:
+```
+conda install pygraphviz
+```
+graphviz is not a Python package and has to be installed separately (if you do not already have it on your system).
+
+Gurobi is a commercial system and requires a licence to run. However, an
+academic licence is free, see https://www.gurobi.com/academia/academic-program-and-licenses/.
+Although you can use pygobnilp with restricted license, the output differs from when using academic license.
+
+### Installing pygobnilp
+
+One installation option is to download this repository and run the following command:
+```
+python pygobnilp/setup.py develop
+```
+Full documentation is also available [here]() in this repository.
+The original source code of pygobnilp can be found [here](https://bitbucket.org/jamescussens/pygobnilp).
