@@ -50,5 +50,9 @@ One installation option is to download this repository and run the following com
 ```
 python pygobnilp/setup.py develop
 ```
-Full documentation is also available [here]() in this repository.
+Full documentation is also available [here](https://github.com/2017Yasu/newPygobnilp/blob/main/pygobnilp/_build/html/index.html) in this repository.
 The original source code of pygobnilp can be found [here](https://bitbucket.org/jamescussens/pygobnilp).
+
+## 日本の方へ
+
+レポートの要約とドキュメントが doc ディレクトリにあります。よろしければご覧ください。
