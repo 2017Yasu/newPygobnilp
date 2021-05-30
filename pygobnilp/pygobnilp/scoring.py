@@ -920,7 +920,7 @@ class MixedData(Data):
         The data with all values.
         
         Returns:
-            pandas.DataFrame: The data
+            pandas.DataFrame: The dataframe
         '''
         
         discrete_df = pd.DataFrame(self._discrete_data, columns=self._discrete_variables)
@@ -1173,8 +1173,8 @@ class AbsGaussianLLScore(ContinuousData):
          parents (iter) : The parents
        
         Returns:
-         tuple: First element of tuple is the Gaussian log-likelihood score for the family for current data
-          Second element is number of parameters which is number of parents plus 2 (intercept plus sd of residuals)
+         tuple: (1) float: the Gaussian log-likelihood score for the family for current data
+         (2) int: the number of parameters which is number of parents plus 2 (intercept plus sd of residuals) (int)
         '''
         return (self.gaussianll(list(parents)+[child]) - self.gaussianll(parents)), len(parents)+2
 
@@ -1330,8 +1330,9 @@ class GaussianL0(AbsGaussianLLScore):
         return this_ll_score - self._k * sb, self._maxllh[child] - self._k * (sb+1)
 
 # Changed
-# Add the classes `AbsCGaussianLLScore`, `CGaussianLL` which compute the conditional Gaussian score of a BN
-# which has both discrete and continuous variables
+# Add the classes
+# `AbsCGaussianLLScore`, `CGaussianLL`, `CGaussianBIC`, `CGaussianAIC`
+# which compute the conditional Gaussian score of a BN which has both discrete and continuous variables
 
 class AbsCGaussianLLScore(MixedData):
     '''
@@ -1347,8 +1348,8 @@ class AbsCGaussianLLScore(MixedData):
             parents (iter): The parent set
             
         Returns:
-            1) float: the conditional Gaussian log-likelihood score for the family for current data
-            2) int: the degrees of freedom
+            tuple: (1) float: the conditional Gaussian log-likelihood score for the family for current data, and
+            (2) int: the degrees of freedom
         '''
         ## prohibit the family with dicrete child and mixed parents
         ## comment out after ensuring the score function is correct
@@ -1371,12 +1372,11 @@ class AbsCGaussianLLScore(MixedData):
             variables (iter): The variable set
             
         Returns:
-            1) float: The conditional Gaussian log-likelihood of some variables
-            2) int: The degrees of freedom
+            tuple: (1) float: The conditional Gaussian log-likelihood of some variables
+            (2) int: The degrees of freedom
         '''
         vset = frozenset(variables)
         try:
-            # raise KeyError()
             return self._cgll_cache[vset], self._df_cache[vset]
         except KeyError:
             dindices = []
@@ -1412,9 +1412,6 @@ class AbsCGaussianLLScore(MixedData):
                     df += result[1]
                 result = self.mix_gaussianll(cindices, [])
                 df += float(result[1]) * float(numinsts - configurations.shape[0])
-                # print(result[1], numinsts)
-                # df = float(result[1]) * float(numinsts)
-                # print(df)
                     
             self._cgll_cache[vset] = cgll
             self._df_cache[vset] = int(df - 1)
@@ -1430,8 +1427,8 @@ class AbsCGaussianLLScore(MixedData):
             rindices (iter): Indices of records in data
             
         Returns:
-            1) float: the log-likelihood given the partitioned data
-            2) int: the degrees of freedom
+            tuple: (1) float: the log-likelihood given the partitioned data
+            (2) int: the degrees of freedom
         '''
         if len(rindices) < 2:
             return 0, int(0.5 * len(cindices) * (len(cindices) + 1)) + 1
@@ -1463,8 +1460,8 @@ class AbsCGaussianLLScore(MixedData):
             indices (iter): indices of continuous variables
 
         Returns:
-            1) float: the log-likelihood
-            2) int: the degrees of freedom
+            tuple: (1) float: the log-likelihood
+            (2) int: the degrees of freedom
         '''
         subcov = np.cov(self._continuous_data[:, indices], rowvar=False, bias=True)
         if subcov.size == 1:
@@ -1484,8 +1481,8 @@ class AbsCGaussianLLScore(MixedData):
             indices (iter): indices of discrete variables
 
         Returns:
-            1) float: the log-likelihood
-            2) int: the degrees of freedom
+            tuple: (1) float: the log-likelihood
+            (2) int: the degrees of freedom
         '''
         numinsts = 1
         for idx in indices:
@@ -1519,8 +1516,8 @@ class CGaussianLL(AbsCGaussianLLScore):
             parents (iter): The parent variables
         
         Returns:
-            1) The fitted log-likelihood local score for the given family
-            2) an upper bound on the local score for proper supersets of `parents`
+            tuple: (1) float: The fitted log-likelihood local score for the given family
+            (2) float: an upper bound on the local score for proper supersets of `parents`
         '''
         return self.ll_score(child, parents)[0], self._maxllh[child]
 
@@ -1554,11 +1551,9 @@ class CGaussianLL(AbsCGaussianLLScore):
             return scores
         else:
             total_ll = 0.
-            total_maxlh = 0.
             for ss in scores.values():
                 total_ll += ss[0]
-                total_maxlh += ss[1]
-            return total_ll, total_maxlh
+            return total_ll
 
 class CGaussianBIC(AbsCGaussianLLScore):
 
@@ -1583,16 +1578,10 @@ class CGaussianBIC(AbsCGaussianLLScore):
             parents (iter): The parent variables
 
         Returns:
-         tuple: The conditional Gaussian BIC local score for the given family and an upper bound on the local score 
-         for proper supersets of `parents`
+         tuple: (1) float: The conditional Gaussian BIC local score for the given family and
+         (2) float: an upper bound on the local score for proper supersets of `parents`
         '''
         this_ll_score, this_df = self.ll_score(child,parents)
-        # print("[{0}|{1}] : {2} - {3} * {4} = {5}".format(child,
-        #                                                  ':'.join(parents),
-        #                                                  this_ll_score,
-        #                                                  self._fn,
-        #                                                  this_df,
-        #                                                  this_ll_score - self._fn * this_df))
         return this_ll_score - self._fn * this_df, self._maxllh[child] - self._fn * (this_df+1)
 
 class CGaussianAIC(AbsCGaussianLLScore):
@@ -1618,16 +1607,10 @@ class CGaussianAIC(AbsCGaussianLLScore):
          parents (iter): The parent variables
 
         Returns:
-         tuple: The Gaussian AIC local score for the given family and an upper bound on the local score 
-         for proper supersets of `parents`
+         tuple: (1) float: The Gaussian AIC local score for the given family and
+         (2) float: an upper bound on the local score for proper supersets of `parents`
         '''
         this_ll_score, this_df = self.ll_score(child,parents)
-        # print("[{0}|{1}] : {2} - {3} * {4} = {5}".format(child,
-        #                                                  ':'.join(parents),
-        #                                                  this_ll_score,
-        #                                                  self._k,
-        #                                                  this_df,
-        #                                                  this_ll_score - self._k * this_df))
         return this_ll_score - self._k * this_df, self._maxllh[child] - self._k * (this_df+1)
 
 # END Classes for penalised log-likelihood 
