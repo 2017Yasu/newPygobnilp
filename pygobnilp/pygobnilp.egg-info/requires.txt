@@ -1,0 +1,8 @@
+scipy
+pygraphviz
+matplotlib
+networkx
+pandas
+numpy
+scikit-learn
+numba

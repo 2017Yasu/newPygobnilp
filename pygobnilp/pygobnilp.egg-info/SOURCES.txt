@@ -1,0 +1,10 @@
+README.md
+rungobnilp.py
+setup.py
+pygobnilp/gobnilp.py
+pygobnilp/scoring.py
+pygobnilp.egg-info/PKG-INFO
+pygobnilp.egg-info/SOURCES.txt
+pygobnilp.egg-info/dependency_links.txt
+pygobnilp.egg-info/requires.txt
+pygobnilp.egg-info/top_level.txt
